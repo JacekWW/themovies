@@ -22,7 +22,7 @@ struct Movie: Decodable {
 	let country: String
 	let awards: String
 	let poster: String
-	let ratings: [Ratings]
+	let ratings: [Rating]
 	let metascore: Int
 	let imdbRating: Double
 	let imdbVotes: String
@@ -63,7 +63,7 @@ struct Movie: Decodable {
 	}
 }
 
-struct Ratings: Decodable {
+struct Rating: Decodable {
 	let source: String
 	let value: String
 	
