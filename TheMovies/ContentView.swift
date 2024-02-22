@@ -30,6 +30,9 @@ struct ContentView: View {
 				}
 			}
 		}
+		.onTapGesture {
+			isSearchOn = false
+		}
 	}
 
 	init(viewModel: MoviesViewModel) {
@@ -61,8 +64,7 @@ struct MovieListItem: View {
 						.font(.title)
 						.frame(width: 230, alignment: .leading)
 						.padding(.leading, 0)
-					Text("\(movie.year)")
-
+					Text(verbatim: "\(movie.year)")
 					Spacer()
 				}
 				.frame(maxWidth: 232)
@@ -79,6 +81,7 @@ struct MovieListItem: View {
 struct SearchViewContainer: View {
 	@Binding var searchText: String
 	@Binding var isSearchOn: Bool
+	@FocusState var isFocused: Bool
 
 	var body: some View {
 		if isSearchOn {
@@ -94,6 +97,10 @@ struct SearchViewContainer: View {
 					text: $searchText)
 				.border(.gray, width: 1)
 				.padding(.trailing, 20)
+				.onAppear {
+					isFocused = true
+				}
+				.focused($isFocused)
 			}
 		} else {
 			HStack {
