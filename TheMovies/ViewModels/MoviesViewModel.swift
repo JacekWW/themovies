@@ -7,8 +7,8 @@
 
 import Foundation
 
-class MoviesViewModel {
-	private var movies: [Movie] = [
+class MoviesViewModel: ObservableObject {
+	@Published var movies: [Movie] = [
 		Movie(
 			title: "Iron Man",
 			 year: 2008,

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		930EEA5F2B865F0C00EF9309 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930EEA5E2B865F0C00EF9309 /* Movie.swift */; };
 		930EEA622B8677BE00EF9309 /* MoviesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930EEA612B8677BE00EF9309 /* MoviesViewModel.swift */; };
+		930EEA652B873FB800EF9309 /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = 930EEA642B873FB800EF9309 /* AlamofireImage */; };
 		93B502EE2B862A1500F22944 /* TheMoviesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B502ED2B862A1500F22944 /* TheMoviesApp.swift */; };
 		93B502F02B862A1500F22944 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B502EF2B862A1500F22944 /* ContentView.swift */; };
 		93B502F22B862A1B00F22944 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93B502F12B862A1B00F22944 /* Assets.xcassets */; };
@@ -55,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				930EEA652B873FB800EF9309 /* AlamofireImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -165,6 +167,9 @@
 			dependencies = (
 			);
 			name = TheMovies;
+			packageProductDependencies = (
+				930EEA642B873FB800EF9309 /* AlamofireImage */,
+			);
 			productName = TheMovies;
 			productReference = 93B502EA2B862A1500F22944 /* TheMovies.app */;
 			productType = "com.apple.product-type.application";
@@ -237,6 +242,9 @@
 				Base,
 			);
 			mainGroup = 93B502E12B862A1500F22944;
+			packageReferences = (
+				930EEA632B873FB800EF9309 /* XCRemoteSwiftPackageReference "AlamofireImage" */,
+			);
 			productRefGroup = 93B502EB2B862A1500F22944 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -612,6 +620,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		930EEA632B873FB800EF9309 /* XCRemoteSwiftPackageReference "AlamofireImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/AlamofireImage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.3.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		930EEA642B873FB800EF9309 /* AlamofireImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 930EEA632B873FB800EF9309 /* XCRemoteSwiftPackageReference "AlamofireImage" */;
+			productName = AlamofireImage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 93B502E22B862A1500F22944 /* Project object */;
 }
