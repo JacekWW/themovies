@@ -5,17 +5,22 @@
 //  Created by Jacek Wierzbicki-Wos on 21/02/2024.
 //
 
-import AlamofireImage
+import Alamofire
+import Combine
 import SwiftUI
 
 struct ContentView: View {
-	@ObservedObject private var viewModel: MoviesViewModel
+	@State private var network: NetworkService = NetworkService()
+	@StateObject private var viewModel: MoviesViewModel
+
 	@State private var searchText: String = ""
 	@State private var isSearchOn: Bool = false
-	
+	@State private var cancelable = Set<AnyCancellable>()
+
 	var body: some View {
 		VStack {
 			SearchViewContainer(searchText: $searchText, isSearchOn: $isSearchOn)
+
 			HStack {
 				Text("Movies")
 					.font(.title)
@@ -23,7 +28,8 @@ struct ContentView: View {
 					.padding(.leading, 20)
 				Spacer()
 			}
-			List {
+
+			List{
 				ForEach(viewModel.movies) { movie in
 					MovieListItem(movie: movie)
 						.frame(width: 400, height: 140)
@@ -33,10 +39,21 @@ struct ContentView: View {
 		.onTapGesture {
 			isSearchOn = false
 		}
+		.onAppear {
+			DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+				network.fetchSearchResult(for: "Iron man")
+					.sink { completion in
+						print(completion)
+					} receiveValue: { search in
+						print(search)
+					}
+					.store(in: &cancelable)
+			}
+		}
 	}
 
 	init(viewModel: MoviesViewModel) {
-		self.viewModel = viewModel
+		_viewModel = StateObject(wrappedValue: viewModel)
 	}
 }
 
@@ -45,11 +62,14 @@ struct MovieListItem: View {
 
 	var body: some View {
 		ZStack {
+
 			RoundedRectangle(cornerRadius: 20.0, style: .circular)
 				.padding([.leading, .trailing], 25)
 				.foregroundColor(Color.gray)
 				.ignoresSafeArea(.all)
+			
 			HStack {
+			
 				AsyncImage(url: URL(string: "\(movie.poster)"), content: { image in
 					image
 						.resizable()
@@ -60,14 +80,18 @@ struct MovieListItem: View {
 				})
 
 				VStack(alignment: .leading) {
+				
 					Text("\(movie.title)")
 						.font(.title)
 						.frame(width: 230, alignment: .leading)
 						.padding(.leading, 0)
+					
 					Text(verbatim: "\(movie.year)")
+					
 					Spacer()
 				}
 				.frame(maxWidth: 232)
+				
 				Spacer()
 			}
 		}
@@ -86,12 +110,14 @@ struct SearchViewContainer: View {
 	var body: some View {
 		if isSearchOn {
 			HStack {
+
 				Image(systemName: "magnifyingglass")
 					.frame(width: 20, height: 20, alignment: .leading)
 					.padding(.leading, 20)
 					.onTapGesture {
 						isSearchOn = !isSearchOn
 					}
+
 				TextField(
 					"enter phrase to search",
 					text: $searchText)
@@ -104,7 +130,9 @@ struct SearchViewContainer: View {
 			}
 		} else {
 			HStack {
+
 				Spacer()
+
 				Image(systemName: "magnifyingglass")
 					.frame(width: 20, height: 20, alignment: .trailing)
 					.padding(.trailing, 20)
@@ -114,7 +142,6 @@ struct SearchViewContainer: View {
 			}
 		}
 	}
-
 }
 
 #Preview {

@@ -8,7 +8,7 @@
 import Foundation
 
 struct Movie: Decodable, Identifiable {
-	var id: String = UUID().uuidString
+	var id: String { imdbID }
 
 	let title: String
 	let year: Int
