@@ -5,9 +5,19 @@
 //  Created by Jacek Wierzbicki-Wos on 21/02/2024.
 //
 
+import Combine
 import Foundation
 
-class MoviesViewModel: ObservableObject {
+protocol MoviesViewModelProtocol {
+	func fetchSearchResult(for quote: String)
+}
+
+class MoviesViewModel: MoviesViewModelProtocol, ObservableObject {
+	private var movieRepository: MovieRepositoryProtocol
+
+	private var cancellable = Set<AnyCancellable>()
+
+	@Published var searchResult: [MovieShort]?
 	@Published var movies: [Movie] = [
 		Movie(
 			title: "Iron Man",
@@ -195,4 +205,19 @@ class MoviesViewModel: ObservableObject {
 		   response: true
 	   )
 	]
+
+	func fetchSearchResult(for quote: String) {
+		movieRepository.fetchSearchResult(for: quote)
+
+		movieRepository.searchPublisher
+			.sink { [weak self] searchMovies in
+				self?.searchResult = searchMovies
+			}
+			.store(in: &cancellable)
+	}
+
+	init(repository: MovieRepositoryProtocol = MoviesRepository()) {
+		self.movieRepository = repository
+		self.searchResult = []
+	}
 }

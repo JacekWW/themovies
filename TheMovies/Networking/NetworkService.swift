@@ -9,11 +9,11 @@ import Alamofire
 import Combine
 import Foundation
 
-protocol Networking {
-
+protocol NetworkProtocol {
+	func fetchSearchResult(for query: String) -> AnyPublisher<SearchResult, Alamofire.AFError>
 }
 
-class NetworkService: Networking {
+class NetworkService: NetworkProtocol {
 	private let sessionManager: Session
 
 	private enum Endpoint {
@@ -73,11 +73,11 @@ class NetworkService: Networking {
 		}
 	}
 
-	func fetchSearchResult(for query: String) -> AnyPublisher<Search, Alamofire.AFError> {
-		let future = Future<Search, AFError> { [weak self] promise in
+	public func fetchSearchResult(for query: String) -> AnyPublisher<SearchResult, Alamofire.AFError> {
+		let future = Future<SearchResult, AFError> { [weak self] promise in
 			self?.sessionManager.request(OMDbRouter.search(query))
 				.validate()
-				.responseDecodable(of: Search.self) { response in
+				.responseDecodable(of: SearchResult.self) { response in
 					switch response.result {
 						case .success(let searchResult):
 							promise(.success(searchResult))
