@@ -13,6 +13,7 @@ struct Search: View {
 	@Binding var searchResult: [MovieShort]?
 
 	var search: (String) -> ()
+	var clearSearch: () -> ()
 
 	@FocusState private var isEditing: Bool
 
@@ -43,6 +44,7 @@ struct Search: View {
 								.position(x: 270, y: 12)
 								.onTapGesture {
 									searchText = ""
+									clearSearch()
 								}
 						)
 						.focused($isEditing)
@@ -53,6 +55,8 @@ struct Search: View {
 
 						Button {
 							isSearchActive = false
+							clearSearch()
+							searchText = ""
 						} label: {
 							Text("Cancel")
 								.padding(.leading, 16)
@@ -92,11 +96,13 @@ struct Search: View {
 	init(searchText: Binding<String>,
 		 isSearchActive: Binding<Bool>,
 		 searchResult: Binding<[MovieShort]?>,
-		 search: @escaping (String) -> ()) {
+		 search: @escaping (String) -> (),
+		 clearSearch: @escaping () -> ()) {
 		self._searchText = searchText
 		self._isSearchActive = isSearchActive
 		self._searchResult = searchResult
 		self.search = search
+		self.clearSearch = clearSearch
 	}
 }
 
@@ -131,7 +137,8 @@ struct Search_Previews: PreviewProvider {
 		Search(searchText: $searchText,
 			   isSearchActive: $isSearchActive,
 			   searchResult: $searchResults,
-			   search: { _ in } )
+			   search: { _ in },
+			   clearSearch: { })
 
 //		Search(searchText: "",
 //			   isSearchActive: false,

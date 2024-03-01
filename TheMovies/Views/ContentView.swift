@@ -14,6 +14,7 @@ struct ContentView: View {
 
 	@State private var searchText: String = ""
 	@State private var isSearchActive: Bool = false
+	@State private var clearSearch: () -> ()
 
 	@State private var cancelablle = Set<AnyCancellable>()
 
@@ -23,7 +24,8 @@ struct ContentView: View {
 				Search(searchText: $searchText,
 					   isSearchActive: $isSearchActive,
 					   searchResult: $viewModel.searchResult,
-					   search: { query in viewModel.fetchSearchResult(for: query)})
+					   search: { query in viewModel.fetchSearchResult(for: query)},
+					   clearSearch: { clearSearch() })
 				.frame(maxHeight: isSearchActive ? .infinity : 48)
 
 				if !isSearchActive {
@@ -46,6 +48,7 @@ struct ContentView: View {
 
 	init(viewModel: MoviesViewModel) {
 		_viewModel = StateObject(wrappedValue: viewModel)
+		self.clearSearch = { viewModel.clearSearchResult() }
 	}
 }
 
@@ -56,6 +59,7 @@ struct MovieItem: View {
 		Text("\(movie.title)")
 			.font(.headline)
 	}
+
 	var yearLabel: some View {
 		Text(verbatim: "\(movie.year)")
 			.font(.subheadline)

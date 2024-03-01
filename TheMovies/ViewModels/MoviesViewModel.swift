@@ -10,6 +10,7 @@ import Foundation
 
 protocol MoviesViewModelProtocol {
 	func fetchSearchResult(for quote: String)
+	func clearSearchResult()
 }
 
 class MoviesViewModel: MoviesViewModelProtocol, ObservableObject {
@@ -214,6 +215,10 @@ class MoviesViewModel: MoviesViewModelProtocol, ObservableObject {
 				self?.searchResult = searchMovies
 			}
 			.store(in: &cancellable)
+	}
+
+	func clearSearchResult() {
+		self.searchResult = []
 	}
 
 	init(repository: MovieRepositoryProtocol = MoviesRepository()) {
