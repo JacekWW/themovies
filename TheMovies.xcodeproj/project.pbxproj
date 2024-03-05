@@ -11,6 +11,7 @@
 		930EEA622B8677BE00EF9309 /* MoviesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930EEA612B8677BE00EF9309 /* MoviesViewModel.swift */; };
 		932764B32B8946E700347241 /* MovieShort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932764B22B8946E700347241 /* MovieShort.swift */; };
 		932764B62B89D3E200347241 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 932764B52B89D3E200347241 /* Alamofire */; };
+		933886312B97213100DE8E50 /* OSLog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 933886302B97213100DE8E50 /* OSLog.framework */; };
 		93820AAF2B88AAFD00FE30C8 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93820AAE2B88AAFD00FE30C8 /* NetworkService.swift */; };
 		93B502EE2B862A1500F22944 /* TheMoviesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B502ED2B862A1500F22944 /* TheMoviesApp.swift */; };
 		93B502F02B862A1500F22944 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B502EF2B862A1500F22944 /* ContentView.swift */; };
@@ -45,6 +46,7 @@
 		930EEA5E2B865F0C00EF9309 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		930EEA612B8677BE00EF9309 /* MoviesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesViewModel.swift; sourceTree = "<group>"; };
 		932764B22B8946E700347241 /* MovieShort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieShort.swift; sourceTree = "<group>"; };
+		933886302B97213100DE8E50 /* OSLog.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OSLog.framework; path = System/Library/Frameworks/OSLog.framework; sourceTree = SDKROOT; };
 		93820AAE2B88AAFD00FE30C8 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		93B502EA2B862A1500F22944 /* TheMovies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheMovies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		93B502ED2B862A1500F22944 /* TheMoviesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheMoviesApp.swift; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				932764B62B89D3E200347241 /* Alamofire in Frameworks */,
+				933886312B97213100DE8E50 /* OSLog.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,6 +107,14 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		9338862F2B97213000DE8E50 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				933886302B97213100DE8E50 /* OSLog.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		93820AAD2B88AAE800FE30C8 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
@@ -119,6 +130,7 @@
 				93B502FD2B862A1C00F22944 /* TheMoviesTests */,
 				93B503072B862A1C00F22944 /* TheMoviesUITests */,
 				93B502EB2B862A1500F22944 /* Products */,
+				9338862F2B97213000DE8E50 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
