@@ -11,7 +11,7 @@
 		930EEA622B8677BE00EF9309 /* MoviesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930EEA612B8677BE00EF9309 /* MoviesViewModel.swift */; };
 		932764B32B8946E700347241 /* MovieShort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932764B22B8946E700347241 /* MovieShort.swift */; };
 		932764B62B89D3E200347241 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 932764B52B89D3E200347241 /* Alamofire */; };
-		933886312B97213100DE8E50 /* OSLog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 933886302B97213100DE8E50 /* OSLog.framework */; };
+		933886372B97550700DE8E50 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 933886362B97550700DE8E50 /* Logging */; };
 		93820AAF2B88AAFD00FE30C8 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93820AAE2B88AAFD00FE30C8 /* NetworkService.swift */; };
 		93B502EE2B862A1500F22944 /* TheMoviesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B502ED2B862A1500F22944 /* TheMoviesApp.swift */; };
 		93B502F02B862A1500F22944 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B502EF2B862A1500F22944 /* ContentView.swift */; };
@@ -68,8 +68,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				933886372B97550700DE8E50 /* Logging in Frameworks */,
 				932764B62B89D3E200347241 /* Alamofire in Frameworks */,
-				933886312B97213100DE8E50 /* OSLog.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -228,6 +228,7 @@
 			name = TheMovies;
 			packageProductDependencies = (
 				932764B52B89D3E200347241 /* Alamofire */,
+				933886362B97550700DE8E50 /* Logging */,
 			);
 			productName = TheMovies;
 			productReference = 93B502EA2B862A1500F22944 /* TheMovies.app */;
@@ -303,6 +304,7 @@
 			mainGroup = 93B502E12B862A1500F22944;
 			packageReferences = (
 				932764B42B89D3E200347241 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				933886352B97550700DE8E50 /* XCRemoteSwiftPackageReference "swift-log" */,
 			);
 			productRefGroup = 93B502EB2B862A1500F22944 /* Products */;
 			projectDirPath = "";
@@ -694,6 +696,14 @@
 				minimumVersion = 5.8.1;
 			};
 		};
+		933886352B97550700DE8E50 /* XCRemoteSwiftPackageReference "swift-log" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-log.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.5.4;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -701,6 +711,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 932764B42B89D3E200347241 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		933886362B97550700DE8E50 /* Logging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 933886352B97550700DE8E50 /* XCRemoteSwiftPackageReference "swift-log" */;
+			productName = Logging;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
