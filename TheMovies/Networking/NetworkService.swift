@@ -8,7 +8,6 @@
 import Alamofire
 import Combine
 import Foundation
-import Logging
 
 protocol NetworkProtocol {
 	func fetchSearchResult(for query: String) -> AnyPublisher<SearchResult, Alamofire.AFError>
@@ -16,14 +15,15 @@ protocol NetworkProtocol {
 
 class NetworkService: NetworkProtocol {
 	private let sessionManager: Session
-	private let logger: Logger
+	private let logger: LoggerProtocol
 
 	private enum Endpoint {
 		static let OMDbAPIKey: String = ProcessInfo.processInfo.environment["OMDbAPIKey"]!
 	}
 
 	init(sessionManager: Session = AF,
-		 logger: Logger = Logger(label: "NetworkService")) {
+		 logger: LoggerProtocol = AppLogger(logLevel: .debug,
+											category: "network")) {
 		self.sessionManager = sessionManager
 		self.logger = logger
 
@@ -85,10 +85,14 @@ class NetworkService: NetworkProtocol {
 				.responseDecodable(of: SearchResult.self) { response in
 					switch response.result {
 						case .success(let searchResult):
-							self?.logger.debug("\(searchResult)")
+							self?.logger.debug {
+								"\(searchResult)"
+							}
 							promise(.success(searchResult))
 						case .failure(let error):
-							self?.logger.error(Logger.Message(stringLiteral: "\(error)"))
+							self?.logger.error(message: {
+								"fetchSearchResult error"
+							}, error: error)
 							promise(.failure(error))
 					}
 				}

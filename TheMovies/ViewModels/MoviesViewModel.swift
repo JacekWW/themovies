@@ -7,7 +7,6 @@
 
 import Combine
 import Foundation
-import Logging
 
 protocol MoviesViewModelProtocol {
 	func fetchSearchResult(for quote: String)
@@ -16,7 +15,7 @@ protocol MoviesViewModelProtocol {
 
 class MoviesViewModel: MoviesViewModelProtocol, ObservableObject {
 	private var movieRepository: MovieRepositoryProtocol
-	private var logger: Logger
+	private var logger: LoggerProtocol
 	private var cancellable = Set<AnyCancellable>()
 
 	@Published var searchResult: [MovieShort]?
@@ -223,7 +222,8 @@ class MoviesViewModel: MoviesViewModelProtocol, ObservableObject {
 	}
 
 	init(repository: MovieRepositoryProtocol = MoviesRepository(),
-		 logger: Logger = Logger(label: "MoviesViewModel")) {
+		 logger: LoggerProtocol = AppLogger(logLevel: .info,
+											category: "movieViewModel")) {
 		self.movieRepository = repository
 		self.logger = logger
 		self.searchResult = []

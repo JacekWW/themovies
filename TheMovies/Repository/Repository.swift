@@ -7,7 +7,6 @@
 
 import Combine
 import Foundation
-import Logging
 
 protocol MovieRepositoryProtocol {
 	var searchPublisher: PassthroughSubject<[MovieShort], Never> { get }
@@ -25,13 +24,14 @@ class MoviesManager<T: MovieRepositoryProtocol> {
 
 class MoviesRepository: MovieRepositoryProtocol {
 	let networkService: NetworkProtocol
-	private let logger: Logger
+	private let logger: LoggerProtocol
 
 	public let searchPublisher = PassthroughSubject<[MovieShort], Never>()
 	var cancellable = Set<AnyCancellable>()
 
 	required init(networkServce: NetworkProtocol = NetworkService(),
-				  logger: Logger = Logger(label: "Respository")) {
+				  logger: LoggerProtocol = AppLogger(logLevel: .debug,
+													 category: "repository")) {
 		self.networkService = networkServce
 		self.logger = logger
 	}
@@ -41,9 +41,13 @@ class MoviesRepository: MovieRepositoryProtocol {
 			.sink { completion in
 				switch completion {
 					case .finished:
-						self.logger.debug("fetchSearchResult finished")
+						self.logger.debug {
+							"fetchSearchResult finished"
+						}
 					case .failure(let error):
-						self.logger.error(Logger.Message(stringLiteral: "\(error)"))
+						self.logger.error {
+							"fetchSearchResult finished with \(error)"
+						}
 				}
 			} receiveValue: { [weak self] searchResult in
 				self?.searchPublisher
