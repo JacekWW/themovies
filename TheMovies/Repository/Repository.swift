@@ -41,13 +41,9 @@ class MoviesRepository: MovieRepositoryProtocol {
 			.sink { completion in
 				switch completion {
 					case .finished:
-						self.logger.debug {
-							"fetchSearchResult finished"
-						}
+						self.logger.debug(message: "fetchSearchResult finished")
 					case .failure(let error):
-						self.logger.error {
-							"fetchSearchResult finished with \(error)"
-						}
+						self.logger.error(message: "fetchSearchResult finished with \(error)")
 				}
 			} receiveValue: { [weak self] searchResult in
 				self?.searchPublisher

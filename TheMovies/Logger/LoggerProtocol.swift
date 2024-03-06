@@ -15,8 +15,8 @@ enum LoggerLevel: String {
 }
 
 protocol LoggerProtocol {
-	func debug(message: () -> String)
-	func info(message: () -> String)
-	func warning(message: () -> String, error: Error?)
-	func error(message: () -> String, error: Error?)
+	func debug(message: @autoclosure () -> String)
+	func info(message: @autoclosure () -> String)
+	func warning(message: @autoclosure () -> String, error: Error?)
+	func error(message: @autoclosure () -> String, error: Error?)
 }

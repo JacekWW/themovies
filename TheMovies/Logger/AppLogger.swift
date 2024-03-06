@@ -11,7 +11,7 @@ class AppLogger: LoggerProtocol {
 	private let logLevel: LoggerLevel
 	private let logger: Logger
 
-	func debug(message: () -> String) {
+	func debug(message: @autoclosure () -> String) {
 		guard logLevel.rawValue >= LoggerLevel.debug.rawValue else { return }
 		
 		let message = message()
@@ -19,7 +19,7 @@ class AppLogger: LoggerProtocol {
 		logger.log(level: .debug, "\(message, privacy: .public)")
 	}
 	
-	func info(message: () -> String) {
+	func info(message: @autoclosure () -> String) {
 		guard logLevel.rawValue >= LoggerLevel.info.rawValue else { return }
 		
 		let message = message()
@@ -27,7 +27,7 @@ class AppLogger: LoggerProtocol {
 		logger.log(level: .info, "\(message, privacy: .public)")
 	}
 
-	func warning(message: () -> String, error: Error? = nil) {
+	func warning(message: @autoclosure () -> String, error: Error? = nil) {
 		guard logLevel.rawValue >= LoggerLevel.warning.rawValue else { return }
 		
 		let message = message()
@@ -39,7 +39,7 @@ class AppLogger: LoggerProtocol {
 		}
 	}
 
-	func error(message: () -> String, error: Error? = nil) {
+	func error(message: @autoclosure () -> String, error: Error? = nil) {
 		guard logLevel.rawValue >= LoggerLevel.error.rawValue else { return }
 		
 		let message = message()
@@ -60,11 +60,11 @@ class AppLogger: LoggerProtocol {
 }
 
 extension LoggerProtocol {
-	func warning(message: () -> String, error: Error? = nil) {
-		self.warning(message: message, error: error)
+	func warning(message: @autoclosure () -> String, error: Error? = nil) {
+		self.warning(message: message(), error: error)
 	}
 
-	func error(message: () -> String, error: Error? = nil) {
-		self.error(message: message, error: error)
+	func error(message: @autoclosure () -> String, error: Error? = nil) {
+		self.error(message: message(), error: error)
 	}
 }

@@ -85,14 +85,11 @@ class NetworkService: NetworkProtocol {
 				.responseDecodable(of: SearchResult.self) { response in
 					switch response.result {
 						case .success(let searchResult):
-							self?.logger.debug {
-								"\(searchResult)"
-							}
+							self?.logger.debug(message: "\(searchResult)")
 							promise(.success(searchResult))
 						case .failure(let error):
-							self?.logger.error(message: {
-								"fetchSearchResult error"
-							}, error: error)
+							self?.logger.error(message: "fetchSearchResult error",
+											   error: error)
 							promise(.failure(error))
 					}
 				}
