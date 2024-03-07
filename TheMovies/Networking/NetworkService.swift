@@ -22,8 +22,7 @@ class NetworkService: NetworkProtocol {
 	}
 
 	init(sessionManager: Session = AF,
-		 logger: LoggerProtocol = AppLogger(logLevel: .debug,
-											category: "network")) {
+		 logger: LoggerProtocol = AppLogger(category: "network")) {
 		self.sessionManager = sessionManager
 		self.logger = logger
 

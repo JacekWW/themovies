@@ -30,8 +30,7 @@ class MoviesRepository: MovieRepositoryProtocol {
 	var cancellable = Set<AnyCancellable>()
 
 	required init(networkServce: NetworkProtocol = NetworkService(),
-				  logger: LoggerProtocol = AppLogger(logLevel: .debug,
-													 category: "repository")) {
+				  logger: LoggerProtocol = AppLogger(category: "repository")) {
 		self.networkService = networkServce
 		self.logger = logger
 	}
